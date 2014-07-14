@@ -1,0 +1,18 @@
+<events>
+  <event>
+    <headers>
+      <header1>value1</header1>
+      <header2>value2</header2>
+    </headers>
+    <body>This is a test. This input should show up in an event.</body>
+  </event>
+  <event>
+    <headers>
+      <event2Header1>event2Value1</event2Header1>
+    </headers>
+    <body>This is the 2nd event.</body>
+    <headers>
+      <event2Header2>event2Value2</event2Header2>
+    </headers>
+  </event>
+</events>

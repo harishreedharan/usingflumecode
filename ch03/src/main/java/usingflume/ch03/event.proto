@@ -1,0 +1,12 @@
+option java_package = "usingflume.ch03";
+option java_outer_classname = "UsingFlumeEvent";
+
+message Event {
+  repeated Header header = 1;
+  required bytes body = 2;
+}
+
+message Header {
+  required string key = 1;
+  required string val = 2;
+}
