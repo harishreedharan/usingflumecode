@@ -34,7 +34,7 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreditCardSource extends AbstractEventDrivenSource implements
+public class TransactionSource extends AbstractEventDrivenSource implements
   FlumeCreditCardAuth {
 
   private static final String CONF_HOST = "host";
