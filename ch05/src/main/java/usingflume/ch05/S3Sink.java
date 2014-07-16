@@ -135,6 +135,5 @@ public class S3Sink extends AbstractSink implements Configurable {
 
     batchSize = context.getInteger("endPoint", 1000);
     objPrefix = context.getString("objectPrefix", "flumeData-");
-
   }
 }
