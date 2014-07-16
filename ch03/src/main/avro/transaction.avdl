@@ -1,0 +1,17 @@
+@namespace("usingflume.ch03")
+
+protocol FlumeCreditCardAuth {
+
+  record CreditCardTransaction {
+    string cardNumber;
+    string location;
+    float amount;
+  }
+
+  enum Status {
+    OK,
+    FAILED
+  }
+
+  Status transactionsCompleted(array<CreditCardTransaction> transactions);
+}
