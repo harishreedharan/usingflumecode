@@ -17,7 +17,7 @@
  * under the License.
  */
 
-import org.apache.commons.codec.Charsets;
+import com.google.common.base.Charsets;
 import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.event.EventBuilder;

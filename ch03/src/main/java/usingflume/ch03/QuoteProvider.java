@@ -3,7 +3,7 @@ package usingflume.ch03;
 import java.util.List;
 import java.util.Map;
 
-public interface StockServer {
+public interface QuoteProvider {
 
   void start();
 
@@ -13,5 +13,5 @@ public interface StockServer {
    * @param tickers - List of tickers whose prices must be fetched.
    * @return - a map of ticker to its current price
    */
-  Map<String, Float> getStockPrice(List<String> tickers);
+  Map<String, Float> getQuote(List<String> tickers);
 }

@@ -56,8 +56,9 @@ public class CreditCardSource extends AbstractEventDrivenSource implements
 
   @Override
   protected void doStart() throws FlumeException {
-    srv = new NettyServer(new SpecificResponder(FlumeCreditCardAuth.class,
-      this), new InetSocketAddress(host, port));
+    srv = new NettyServer(
+      new SpecificResponder(FlumeCreditCardAuth.class, this),
+      new InetSocketAddress(host, port));
     srv.start();
     super.start();
   }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class RandomStockPriceServer implements StockServer{
+public class RandomQuoteProvider implements QuoteProvider {
   private final Random r = new Random(System.currentTimeMillis());
 
   @Override
@@ -17,7 +17,7 @@ public class RandomStockPriceServer implements StockServer{
   }
 
   @Override
-  public Map<String, Float> getStockPrice(List<String> tickers) {
+  public Map<String, Float> getQuote(List<String> tickers) {
     Map<String, Float> prices = new HashMap<String, Float>(tickers.size());
     for(String ticker: tickers) {
       prices.put(ticker, r.nextFloat());

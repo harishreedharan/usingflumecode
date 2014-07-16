@@ -24,7 +24,7 @@ public class StockTickerSource extends AbstractPollableSource {
   private int refreshInterval = DEFAULT_REFRESH_INTERVAL;
 
   private final List<String> tickers = new ArrayList<String>();
-  private final StockServer server = new RandomStockPriceServer();
+  private final QuoteProvider server = new RandomQuoteProvider();
 
   private volatile long lastPoll = 0;
 
@@ -34,7 +34,7 @@ public class StockTickerSource extends AbstractPollableSource {
     if(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - lastPoll) >
       refreshInterval) {
       final List<Event> events = new ArrayList<Event>(tickers.size());
-      Map<String, Float> prices = server.getStockPrice(tickers);
+      Map<String, Float> prices = server.getQuote(tickers);
       lastPoll = System.currentTimeMillis();
       // Convert each price into ticker = price form in UTF-8 as event body
       for(Map.Entry<String, Float> e: prices.entrySet()) {
