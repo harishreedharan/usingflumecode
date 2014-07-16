@@ -18,13 +18,26 @@
  */
 package usingflume.ch05;
 
+import com.google.common.base.Preconditions;
 import org.apache.flume.Context;
 import org.apache.flume.EventDeliveryException;
-import org.apache.flume.Sink;
 import org.apache.flume.conf.Configurable;
 import org.apache.flume.sink.AbstractSink;
 
 public class S3Sink extends AbstractSink implements Configurable {
+
+  private static String CONF_AWS_KEYID = "awsAccessKeyId";
+  private static String CONF_SECRET_KEY = "awsSecretKey";
+  private static String CONF_BUCKET = "bucket";
+  private static String CONF_BATCHSIZE = "batchSize";
+
+  private static int DEFAULT_BATCHSIZE = 1000;
+
+  private String awsAccessKeyId;
+  private String awsSecretKey;
+  private String bucket;
+  private int batchSize;
+
   @Override
   public Status process() throws EventDeliveryException {
     return null;
@@ -32,6 +45,20 @@ public class S3Sink extends AbstractSink implements Configurable {
 
   @Override
   public void configure(Context context) {
+    awsAccessKeyId = context.getString(CONF_AWS_KEYID);
+    Preconditions.checkArgument(
+      awsAccessKeyId != null && !awsAccessKeyId.isEmpty(),
+      "AWS Key Id is required");
 
+    awsSecretKey = context.getString(CONF_SECRET_KEY);
+    Preconditions.checkArgument(
+      awsSecretKey != null && !awsSecretKey.isEmpty(),
+      "AWS Secret Key must be specified");
+
+    bucket = context.getString(CONF_BUCKET);
+    Preconditions.checkArgument(bucket != null && !bucket.isEmpty(),
+      "Bucket name must be specified");
+
+    batchSize = context.getInteger(CONF_BATCHSIZE, DEFAULT_BATCHSIZE);
   }
 }
