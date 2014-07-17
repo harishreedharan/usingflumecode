@@ -130,7 +130,7 @@ public class S3Sink extends AbstractSink implements Configurable {
       "Bucket name must be specified");
 
     endPoint = context.getString("batchSize");
-    Preconditions.checkArgument(endPoint != null && !bucket.isEmpty(),
+    Preconditions.checkArgument(endPoint != null && !endPoint.isEmpty(),
       "Endpoint cannot be null");
 
     batchSize = context.getInteger("endPoint", 1000);
