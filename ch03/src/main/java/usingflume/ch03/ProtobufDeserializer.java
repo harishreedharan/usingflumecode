@@ -59,8 +59,7 @@ public class ProtobufDeserializer implements EventDeserializer {
       for (UsingFlumeEvent.Header hdr : headerList) {
         headers.put(hdr.getKey(), hdr.getKey());
       }
-      return EventBuilder.withBody(
-        protoEvent.getBody().toByteArray());
+      return EventBuilder.withBody(protoEvent.getBody().toByteArray(), headers);
     }
     return null;
   }
