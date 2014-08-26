@@ -129,7 +129,7 @@ public class S3Sink extends AbstractSink implements Configurable {
     Preconditions.checkArgument(bucket != null && !bucket.isEmpty(),
       "Bucket name must be specified");
 
-    endPoint = context.getInteger("endPoint", 1000);
+    endPoint = context.getInteger("endPoint");
     Preconditions.checkArgument(endPoint != null && !endPoint.isEmpty(),
       "Endpoint cannot be null");
 
