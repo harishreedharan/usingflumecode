@@ -25,7 +25,6 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import org.apache.flume.Context;
 import org.apache.flume.Event;
@@ -36,7 +35,6 @@ import org.apache.flume.sink.AbstractSink;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class S3Sink extends AbstractSink implements Configurable {
@@ -51,8 +49,11 @@ public class S3Sink extends AbstractSink implements Configurable {
   private String endPoint;
 
   private AmazonS3 connection;
+
   // 64K buffer.
-  private final byte[] buffer = new byte[64 * 1024];
+  public static final int DEFAULT_BUFFER_SIZE = 64 * 1024;
+
+  private int bufferSize;
 
   @Override
   public void start() {
@@ -79,7 +80,7 @@ public class S3Sink extends AbstractSink implements Configurable {
     Status status = Status.BACKOFF;
     Transaction tx = null;
     final ByteArrayOutputStream data
-      = new ByteArrayOutputStream(64 * 1024);
+      = new ByteArrayOutputStream(bufferSize);
     try {
       tx = getChannel().getTransaction();
       tx.begin();
@@ -135,5 +136,6 @@ public class S3Sink extends AbstractSink implements Configurable {
 
     batchSize = context.getInteger("batchSize", 1000);
     objPrefix = context.getString("objectPrefix", "flumeData-");
+    bufferSize = context.getInteger("bufferSize", DEFAULT_BUFFER_SIZE);
   }
 }
