@@ -26,6 +26,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.EventDeliveryException;
@@ -37,6 +38,27 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ *
+ * S3 Sink implementation
+ *
+ * Following are the configuration parameters expected
+ *
+ * <PRE>
+ * ------------------------------------------------------------------------
+ *  Name      Default Value     Description
+ * ------------------------------------------------------------------------
+ * awsAccessKeyId   -           AWS Access Key
+ * awsSecretKey     -           AWS Secret Key
+ * bucket           -           S3 bucket where data is to be uploaded
+ * endPoint         -           S3 end point
+ * batchSize      1000          Batch Size for uploading events
+ * objectPrefix   flumeData-    Prefix to be used for files stored in S3 bucket
+ * bufferSize     64K           Buffer Size to be used for storing data before
+ *                              writing to S3
+ *
+ * </PRE>
+ */
 public class S3Sink extends AbstractSink implements Configurable {
 
   private String objPrefix;
@@ -52,6 +74,8 @@ public class S3Sink extends AbstractSink implements Configurable {
 
   // 64K buffer.
   public static final int DEFAULT_BUFFER_SIZE = 64 * 1024;
+  public static final int DEFAULT_BATCH_SIZE = 1000;
+  public static final String DEFAULT_OBJECT_PREFIX = "flumeData-";
 
   private int bufferSize;
 
@@ -117,25 +141,23 @@ public class S3Sink extends AbstractSink implements Configurable {
   @Override
   public void configure(Context context) {
     awsAccessKeyId = context.getString("awsAccessKeyId");
-    Preconditions.checkArgument(
-      awsAccessKeyId != null && !awsAccessKeyId.isEmpty(),
-      "AWS Key Id is required");
+    Preconditions.checkArgument(!Strings.isNullOrEmpty(awsAccessKeyId),
+                                "AWS Key Id is required");
 
     awsSecretKey = context.getString("awsSecretKey");
-    Preconditions.checkArgument(
-      awsSecretKey != null && !awsSecretKey.isEmpty(),
-      "AWS Secret Key must be specified");
+    Preconditions.checkArgument(!Strings.isNullOrEmpty(awsSecretKey),
+                                "AWS Secret Key must be specified");
 
     bucket = context.getString("bucket");
-    Preconditions.checkArgument(bucket != null && !bucket.isEmpty(),
-      "Bucket name must be specified");
+    Preconditions.checkArgument(!Strings.isNullOrEmpty(bucket),
+                                "Bucket name must be specified");
 
     endPoint = context.getString("endPoint");
-    Preconditions.checkArgument(endPoint != null && !endPoint.isEmpty(),
-      "Endpoint cannot be null");
+    Preconditions.checkArgument(!Strings.isNullOrEmpty(endPoint),
+                                "Endpoint cannot be null");
 
-    batchSize = context.getInteger("batchSize", 1000);
-    objPrefix = context.getString("objectPrefix", "flumeData-");
+    batchSize = context.getInteger("batchSize", DEFAULT_BATCH_SIZE);
+    objPrefix = context.getString("objectPrefix", DEFAULT_OBJECT_PREFIX);
     bufferSize = context.getInteger("bufferSize", DEFAULT_BUFFER_SIZE);
   }
 }
