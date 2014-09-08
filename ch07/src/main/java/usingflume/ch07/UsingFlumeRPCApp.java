@@ -28,8 +28,7 @@ import static org.apache.flume.api.RpcClientConfigurationConstants.*;
 public abstract class UsingFlumeRPCApp {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(
-    UsingFlumeDefaultRPCApp
-      .class);
+    UsingFlumeRPCApp.class);
 
   private RpcClient client;
   private final Properties config = new Properties();

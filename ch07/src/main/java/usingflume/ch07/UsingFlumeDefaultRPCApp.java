@@ -23,10 +23,8 @@ public class UsingFlumeDefaultRPCApp extends UsingFlumeRPCApp {
     Properties config) {
     config.setProperty(CONFIG_HOSTS, "h1");
 
-    host = commandLine.getOptionValue("p").trim();
+    host = commandLine.getOptionValue("r").trim();
     Preconditions.checkNotNull(host, "Remote host cannot be null.");
-
-    config.setProperty(CONFIG_HOSTS, "h1");
 
     port = commandLine.getOptionValue("p").trim();
     Preconditions.checkNotNull(port, "Port cannot be null.");
