@@ -1,6 +1,7 @@
 package usingflume.ch03;
 
 import com.google.common.base.Preconditions;
+import com.google.protobuf.ByteString;
 import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.event.EventBuilder;
@@ -9,6 +10,7 @@ import org.apache.flume.serialization.ResettableInputStream;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,15 +20,11 @@ import java.util.Map;
 public class ProtobufDeserializer implements EventDeserializer {
 
   private final ResettableInputStream stream;
-  private final ByteBuffer sizeBuffer;
-  private final ByteBuffer dataBuffer;
   private boolean isOpen;
 
   private ProtobufDeserializer(ResettableInputStream stream) {
     // No configuration to do, so ignore the context.
     this.stream = stream;
-    this.sizeBuffer = ByteBuffer.allocate(4);
-    this.dataBuffer = ByteBuffer.allocate(4096);
     isOpen = true;
   }
 
@@ -39,19 +37,17 @@ public class ProtobufDeserializer implements EventDeserializer {
     // parseDelimitedFrom method.
     // The format is expected to be:
     // <length of message> - int
-    // <protobuf message>
+    // <protobuf message (written using writeTo (not delimited)>
     // We assume here that the file is well-formed and the length
     // or the
     // message are not partially cut off.
-    sizeBuffer.clear();
-    if (stream.read(sizeBuffer.array(), 0, Integer.SIZE) != -1) {
-      int length = sizeBuffer.getInt();
-      dataBuffer.clear();
-      stream.read(dataBuffer.array(), 0, length);
-      UsingFlumeEvent.Event protoEvent = UsingFlumeEvent.Event
-        .parseDelimitedFrom(
-          new ByteArrayInputStream(dataBuffer.array(), 0,
-            length));
+    byte[] sz = new byte[4];
+    if (stream.read(sz, 0, 4) != -1) {
+      int length = ByteBuffer.wrap(sz).getInt();
+      byte[] data = new byte[length];
+      stream.read(data, 0, data.length);
+      UsingFlumeEvent.Event protoEvent =
+        UsingFlumeEvent.Event.parseFrom(new ByteArrayInputStream(data));
       List<UsingFlumeEvent.Header> headerList
         = protoEvent.getHeaderList();
       Map<String, String> headers = new HashMap<String, String>(
