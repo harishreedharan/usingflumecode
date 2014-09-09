@@ -7,6 +7,20 @@ import org.apache.flume.interceptor.Interceptor;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * Counting Interceptor implementation. It adds a count header to each event
+ * that passes through the Interceptor.
+ *
+ * The interceptor can be configured in flume config file as,
+ * where src1 is the source
+ *
+ * a1.sources.src1.interceptors = interceptor1
+ * a1.sources.src1.interceptors.interceptor1.type = usingflume.ch06.CounterInterceptor
+ * a1.sources.src1.interceptors.interceptor1.header = count
+ *
+ * Default key used by the interceptor is count
+ *
+ */
 public class CounterInterceptor implements Interceptor {
   private final String headerKey;
   private static final String CONF_HEADER_KEY = "header";

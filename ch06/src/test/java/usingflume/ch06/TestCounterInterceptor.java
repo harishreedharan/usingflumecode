@@ -6,7 +6,6 @@ import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.event.EventBuilder;
 import org.apache.flume.interceptor.Interceptor;
-import org.apache.flume.source.ExecSource;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -82,7 +80,7 @@ public class TestCounterInterceptor {
     Integer expected = 1;
     while(counterIter.hasNext()) {
       Integer count = counterIter.next();
-      Assert.assertEquals(expected++, count);
+      Assert.assertEquals((Integer)expected++, count);
     }
 
   }
