@@ -44,7 +44,7 @@ public class CounterInterceptor implements Interceptor {
     // No op
   }
 
-  public static class UsingFlumeBuilder
+  public static class CounterInterceptorBuilder
     implements Interceptor.Builder {
 
     private Context ctx;
