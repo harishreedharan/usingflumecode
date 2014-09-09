@@ -114,7 +114,9 @@ public class S3Sink extends AbstractSink implements Configurable {
         if (e == null) {
           break;
         }
-        data.write(e.getBody());
+        byte[] body = e.getBody();
+        data.write(body.length);
+        data.write(body);
       }
       if (i != 0) {
         connection.putObject(bucket,
