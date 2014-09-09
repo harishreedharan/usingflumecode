@@ -36,6 +36,7 @@ import org.apache.flume.sink.AbstractSink;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -115,7 +116,8 @@ public class S3Sink extends AbstractSink implements Configurable {
           break;
         }
         byte[] body = e.getBody();
-        data.write(body.length);
+        data.write(
+          ByteBuffer.allocate(Integer.SIZE / 8).putInt(body.length).array());
         data.write(body);
       }
       if (i != 0) {
