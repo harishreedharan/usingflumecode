@@ -27,6 +27,7 @@ import usingflume.ch03.UsingFlumeEvent;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.Map;
 
 public class ProtobufSerializer implements EventSerializer {
@@ -68,8 +69,8 @@ public class ProtobufSerializer implements EventSerializer {
     }
     builder.setBody(ByteString.copyFrom(event.getBody()));
     UsingFlumeEvent.Event e = builder.build();
-    int length = e.getSerializedSize();
-    stream.write(length);
+    stream.write(ByteBuffer.allocate(Integer.SIZE / 8).putInt(e
+      .getSerializedSize()).array());
     e.writeTo(stream);
   }
 
