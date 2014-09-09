@@ -32,10 +32,12 @@ import org.apache.flume.Event;
 import org.apache.flume.EventDeliveryException;
 import org.apache.flume.Transaction;
 import org.apache.flume.conf.Configurable;
+import org.apache.flume.instrumentation.SinkCounter;
+import org.apache.flume.serialization.EventSerializer;
+import org.apache.flume.serialization.EventSerializerFactory;
 import org.apache.flume.sink.AbstractSink;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -80,6 +82,14 @@ public class S3Sink extends AbstractSink implements Configurable {
 
   private int bufferSize;
 
+  // Serializer
+  private EventSerializer serializer;
+  private String serializerType;
+  private Context serializerContext;
+  private ByteArrayOutputStream outputStream;
+
+  private SinkCounter sinkCounter;
+
   @Override
   public void start() {
     // Set up Amazon S3 client.
@@ -92,11 +102,13 @@ public class S3Sink extends AbstractSink implements Configurable {
     if (!connection.doesBucketExist(bucket)) {
       connection.createBucket(bucket);
     }
+    sinkCounter.start();
     super.start();
   }
 
   @Override
   public synchronized void stop() {
+    sinkCounter.stop();
     super.stop();
   }
 
@@ -104,8 +116,20 @@ public class S3Sink extends AbstractSink implements Configurable {
   public Status process() throws EventDeliveryException {
     Status status = Status.BACKOFF;
     Transaction tx = null;
-    final ByteArrayOutputStream data
-      = new ByteArrayOutputStream(bufferSize);
+
+    if (outputStream == null) {
+      try {
+        outputStream = new ByteArrayOutputStream(bufferSize);
+        serializer = EventSerializerFactory.getInstance(
+                serializerType, serializerContext, outputStream);
+        serializer.afterCreate();
+        sinkCounter.incrementConnectionCreatedCount();
+      } catch (IOException e) {
+        sinkCounter.incrementConnectionFailedCount();
+        throw new EventDeliveryException("Failed to create Serializer", e);
+      }
+    }
+
     try {
       tx = getChannel().getTransaction();
       tx.begin();
@@ -115,25 +139,22 @@ public class S3Sink extends AbstractSink implements Configurable {
         if (e == null) {
           break;
         }
-        byte[] body = e.getBody();
-        data.write(
-          ByteBuffer.allocate(Integer.SIZE / 8).putInt(body.length).array());
-        data.write(body);
+          serializer.write(e);
       }
       if (i != 0) {
         connection.putObject(bucket,
           objPrefix + suffix.incrementAndGet(),
-          new ByteArrayInputStream(data.toByteArray()),
+          new ByteArrayInputStream(outputStream.toByteArray()),
           new ObjectMetadata());
         status = Status.READY;
       }
+      outputStream.flush();
       tx.commit();
     } catch (Exception e) {
       if (tx != null) {
         tx.rollback();
       }
-      throw new EventDeliveryException("Error while processing " +
-        "data", e);
+      throw new EventDeliveryException("Error while processing data", e);
     } finally {
       if (tx != null) {
         tx.close();
@@ -163,5 +184,14 @@ public class S3Sink extends AbstractSink implements Configurable {
     batchSize = context.getInteger("batchSize", DEFAULT_BATCH_SIZE);
     objPrefix = context.getString("objectPrefix", DEFAULT_OBJECT_PREFIX);
     bufferSize = context.getInteger("bufferSize", DEFAULT_BUFFER_SIZE);
+
+    serializerType = context.getString("sink.serializer", "AVRO_EVENT");
+    serializerContext =
+            new Context(context.getSubProperties("sink." +
+                    EventSerializer.CTX_PREFIX));
+
+    if (sinkCounter == null) {
+      sinkCounter = new SinkCounter(getName());
+    }
   }
 }
