@@ -64,7 +64,7 @@ public class S3Sink extends AbstractSink implements Configurable {
 
   private String objPrefix;
   private final AtomicLong suffix = new AtomicLong(System
-    .currentTimeMillis());
+          .currentTimeMillis());
   private String awsAccessKeyId;
   private String awsSecretKey;
   private String bucket;
@@ -84,7 +84,7 @@ public class S3Sink extends AbstractSink implements Configurable {
   public void start() {
     // Set up Amazon S3 client.
     AWSCredentials credentials = new BasicAWSCredentials(
-      awsAccessKeyId, awsSecretKey);
+            awsAccessKeyId, awsSecretKey);
     ClientConfiguration config = new ClientConfiguration();
     config.setProtocol(Protocol.HTTP);
     connection = new AmazonS3Client(credentials, config);
@@ -105,7 +105,7 @@ public class S3Sink extends AbstractSink implements Configurable {
     Status status = Status.BACKOFF;
     Transaction tx = null;
     final ByteArrayOutputStream data
-      = new ByteArrayOutputStream(bufferSize);
+            = new ByteArrayOutputStream(bufferSize);
     try {
       tx = getChannel().getTransaction();
       tx.begin();
@@ -117,14 +117,14 @@ public class S3Sink extends AbstractSink implements Configurable {
         }
         byte[] body = e.getBody();
         data.write(
-          ByteBuffer.allocate(Integer.SIZE / 8).putInt(body.length).array());
+                ByteBuffer.allocate(Integer.SIZE / 8).putInt(body.length).array());
         data.write(body);
       }
       if (i != 0) {
         connection.putObject(bucket,
-          objPrefix + suffix.incrementAndGet(),
-          new ByteArrayInputStream(data.toByteArray()),
-          new ObjectMetadata());
+                objPrefix + suffix.incrementAndGet(),
+                new ByteArrayInputStream(data.toByteArray()),
+                new ObjectMetadata());
         status = Status.READY;
       }
       tx.commit();
@@ -133,7 +133,7 @@ public class S3Sink extends AbstractSink implements Configurable {
         tx.rollback();
       }
       throw new EventDeliveryException("Error while processing " +
-        "data", e);
+              "data", e);
     } finally {
       if (tx != null) {
         tx.close();
@@ -146,19 +146,19 @@ public class S3Sink extends AbstractSink implements Configurable {
   public void configure(Context context) {
     awsAccessKeyId = context.getString("awsAccessKeyId");
     Preconditions.checkArgument(!Strings.isNullOrEmpty(awsAccessKeyId),
-                                "AWS Key Id is required");
+            "AWS Key Id is required");
 
     awsSecretKey = context.getString("awsSecretKey");
     Preconditions.checkArgument(!Strings.isNullOrEmpty(awsSecretKey),
-                                "AWS Secret Key must be specified");
+            "AWS Secret Key must be specified");
 
     bucket = context.getString("bucket");
     Preconditions.checkArgument(!Strings.isNullOrEmpty(bucket),
-                                "Bucket name must be specified");
+            "Bucket name must be specified");
 
     endPoint = context.getString("endPoint");
     Preconditions.checkArgument(!Strings.isNullOrEmpty(endPoint),
-                                "Endpoint cannot be null");
+            "Endpoint cannot be null");
 
     batchSize = context.getInteger("batchSize", DEFAULT_BATCH_SIZE);
     objPrefix = context.getString("objectPrefix", DEFAULT_OBJECT_PREFIX);
