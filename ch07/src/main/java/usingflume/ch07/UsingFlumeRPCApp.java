@@ -39,20 +39,12 @@ public abstract class UsingFlumeRPCApp {
 
   protected void parseCommandLine(String args[])
     throws ParseException {
-
-    // ONLY for tests!
-    config.setProperty("trust-all-certs", "true");
-
     setClient(config);
     Options opts = new Options();
 
     Option opt = new Option("r", "remote", true,
       "Remote host to connect " +
         "to");
-    opt.setRequired(true);
-    opts.addOption(opt);
-
-    opt = new Option("p", "port", true, "Port to connect to");
     opt.setRequired(true);
     opts.addOption(opt);
 
@@ -76,8 +68,22 @@ public abstract class UsingFlumeRPCApp {
     opts.addOption(opt);
 
     opt = new Option("s", "ssl", false,
-      "If set, ssl is enabled using the " +
-        "default Java trust store");
+      "If set, ssl is enabled using keystore supplied by argument k");
+    opt.setRequired(false);
+    opts.addOption(opt);
+
+    opt = new Option("k", "keystore", true,
+      "Keystore to use with SSL");
+    opt.setRequired(false);
+    opts.addOption(opt);
+
+    opt = new Option("d", "keystore-password", true,
+      "Password for keystore");
+    opt.setRequired(false);
+    opts.addOption(opt);
+
+    opt = new Option("t", "keystore-type", true,
+      "Type keystore");
     opt.setRequired(false);
     opts.addOption(opt);
 
@@ -118,8 +124,13 @@ public abstract class UsingFlumeRPCApp {
       }
     }
 
-    if (commandLine.hasOption("s")) {
-      config.getProperty(CONFIG_SSL, commandLine.getOptionValue("s"));
+    if (commandLine.hasOption("s") && commandLine.hasOption("k") && commandLine.hasOption("d")) {
+      config.setProperty(CONFIG_SSL, "true");
+      config.setProperty(CONFIG_TRUSTSTORE, commandLine.getOptionValue("k"));
+      config.setProperty(CONFIG_TRUSTSTORE_PASSWORD, commandLine.getOptionValue("d"));
+      if (commandLine.hasOption("t")) {
+        config.setProperty(CONFIG_TRUSTSTORE_TYPE, commandLine.getOptionValue("t"));
+      }
     }
 
     if (commandLine.hasOption("i")) {

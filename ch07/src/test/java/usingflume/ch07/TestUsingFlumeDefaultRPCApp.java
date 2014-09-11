@@ -57,18 +57,23 @@ public class TestUsingFlumeDefaultRPCApp {
     ctx.put("port", "41434");
     List<String> args = Lists.newArrayList();
     args.add("-r");
-    args.add("0.0.0.0");
-    args.add("-p");
-    args.add("41434");
+    args.add("0.0.0.0:41434");
     if (compress) {
       ctx.put("compression-type", "deflate");
       args.add("-c");
     }
     if (ssl) {
-      ctx.put("keystore", "src/test/resources/server.p12");
+      ctx.put("ssl", "true");
+      ctx.put("keystore", getClass().getResource("/server.p12").getFile());
       ctx.put("keystore-password", "password");
       ctx.put("keystore-type", "PKCS12");
       args.add("-s");
+      args.add("-k");
+      args.add(getClass().getResource("/server.p12").getFile());
+      args.add("-d");
+      args.add("password");
+      args.add("-t");
+      args.add("PKCS12");
     }
     String[] argsArray = args.toArray(new String[0]);
     Configurables.configure(source, ctx);
@@ -83,6 +88,8 @@ public class TestUsingFlumeDefaultRPCApp {
     while (channel.take() != null) {
       i++;
     }
+    tx.commit();
+    tx.close();
 
     // 5 threads, each thread 100 transactions of 100 events each
    Assert.assertEquals(50000, i);

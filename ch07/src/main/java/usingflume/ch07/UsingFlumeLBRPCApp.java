@@ -31,13 +31,11 @@ public class UsingFlumeLBRPCApp extends UsingFlumeRPCApp {
       hostBuilder.append("h").append(i).append(" ");
     }
     config.setProperty(CONFIG_HOSTS, hostBuilder.toString());
-    port = commandLine.getOptionValue("p").trim();
-    Preconditions.checkNotNull(port, "Port cannot be null.");
 
     for (int i = 1; i <= hostCount; i++) {
       config.setProperty(
         CONFIG_HOSTS_PREFIX + "h" + String.valueOf(i),
-        hostnames[i - 1] + ":" + port);
+        hostnames[i - 1]);
     }
   }
 
