@@ -50,7 +50,7 @@ public class UsingFlumeLBRPCApp extends UsingFlumeRPCApp {
   }
 
 
-  public static void main(String args[]) throws ParseException {
+  public static void main(String args[]) throws Exception {
     // Outsource all work to the app.run method which can be tested
     // more easily
     final UsingFlumeLBRPCApp app = new UsingFlumeLBRPCApp();

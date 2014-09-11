@@ -38,7 +38,7 @@ public class UsingFlumeDefaultRPCApp extends UsingFlumeRPCApp {
     // No op
   }
 
-  public static void main(String args[]) throws ParseException {
+  public static void main(String args[]) throws Exception {
     // Outsource all work to the app.run method which can be tested
     // more easily
     final UsingFlumeDefaultRPCApp app = new UsingFlumeDefaultRPCApp();

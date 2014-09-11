@@ -22,6 +22,7 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.apache.flume.api.RpcClientConfigurationConstants.*;
 
@@ -34,10 +35,13 @@ public abstract class UsingFlumeRPCApp {
   private final Properties config = new Properties();
   private final ExecutorService executor
     = Executors.newFixedThreadPool(5);
-  private int batchSize;
+  private int batchSize = 100;
 
   protected void parseCommandLine(String args[])
     throws ParseException {
+
+    // ONLY for tests!
+    config.setProperty("trust-all-certs", "true");
 
     setClient(config);
     Options opts = new Options();
@@ -107,8 +111,7 @@ public abstract class UsingFlumeRPCApp {
     }
 
     if (commandLine.hasOption("c")) {
-      config.setProperty(CONFIG_COMPRESSION_TYPE,
-        commandLine.getOptionValue("compression"));
+      config.setProperty(CONFIG_COMPRESSION_TYPE, "deflate");
       if (commandLine.hasOption("l")) {
         config.setProperty(CONFIG_COMPRESSION_LEVEL,
           commandLine.getOptionValue("l"));
@@ -136,20 +139,23 @@ public abstract class UsingFlumeRPCApp {
     Properties config);
 
   @VisibleForTesting
-  protected void run(String[] args) throws ParseException {
+  protected void run(String[] args) throws Exception {
     parseCommandLine(args);
 
     final UsingFlumeRPCApp app = this;
 
     for (int i = 0; i < 5; i++) {
       executor.submit(new Runnable() {
+        final int total = 100;
         @Override
         public void run() {
-          while (true) {
+          int i = 0;
+          while (i++ < total) {
             app.generateAndSend();
           }
         }
-      });
+      }).get();
+      app.closeClient();
     }
 
     // Set a shutdown hook to shutdown all the threads and the
@@ -181,12 +187,19 @@ public abstract class UsingFlumeRPCApp {
     // If client is null, it was either never created or was closed by
     // closeClient above
     if (client == null) {
-      client = RpcClientFactory.getInstance(config);
+      try {
+        client = RpcClientFactory.getInstance(config);
+      } catch (Exception e) {
+        e.printStackTrace();
+        LOGGER.warn("Client creation failed. Source may not have been started yet");
+      }
     }
   }
 
   protected synchronized void closeClient() {
-    client.close();
+    if(client != null) {
+      client.close();
+    }
     client = null;
   }
 
@@ -195,11 +208,12 @@ public abstract class UsingFlumeRPCApp {
     List<Event> events = new ArrayList<Event>(100);
     for (int i = 0; i < batchSize; i++) {
       events.add(EventBuilder.withBody(
-        RandomStringUtils.randomAlphanumeric(1024).getBytes()));
+        RandomStringUtils.randomAlphanumeric(100).getBytes()));
     }
     try {
       client.appendBatch(events);
     } catch (Throwable e) {
+      e.printStackTrace();
       LOGGER.error(
         "Error while attempting to write data to remote host at " +
           "%s:%s. Events will be dropped!");
