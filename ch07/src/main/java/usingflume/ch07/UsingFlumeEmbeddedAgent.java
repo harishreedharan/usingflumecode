@@ -49,6 +49,9 @@ public class UsingFlumeEmbeddedAgent {
     UsingFlumeEmbeddedAgent usingFlumeEmbeddedAgent = new
       UsingFlumeEmbeddedAgent();
     usingFlumeEmbeddedAgent.run(args);
+    while (true) {
+      usingFlumeEmbeddedAgent.generateAndSend();
+    }
   }
 
   public void run(String args[]) throws Exception {
