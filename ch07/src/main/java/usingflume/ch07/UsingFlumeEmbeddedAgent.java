@@ -19,6 +19,7 @@
 package usingflume.ch07;
 
 import com.google.common.base.Preconditions;
+import com.google.common.io.Files;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -32,6 +33,7 @@ import org.apache.flume.event.EventBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,14 +44,15 @@ public class UsingFlumeEmbeddedAgent {
   private static final Logger LOGGER = LoggerFactory.getLogger
     (UsingFlumeEmbeddedAgent.class);
   private final EmbeddedAgent agent = new EmbeddedAgent(
-    "Using Flume");
+    "UsingFlume");
   private int batchSize = 100;
 
   public static void main(String args[]) throws Exception {
     UsingFlumeEmbeddedAgent usingFlumeEmbeddedAgent = new
       UsingFlumeEmbeddedAgent();
     usingFlumeEmbeddedAgent.run(args);
-    while (true) {
+    int i = 0;
+    while (i++ < 100) {
       usingFlumeEmbeddedAgent.generateAndSend();
     }
   }
@@ -82,10 +85,15 @@ public class UsingFlumeEmbeddedAgent {
 
     Map<String, String> config = new HashMap<String, String>();
     parseHostsAndPort(commandLine, config);
-    config.put("channel", "file");
+//    config.put("sources", "s1");
+    config.put("source.type", "embedded");
+//    config.put("source.channels", "file");
+    File dcDir = Files.createTempDir();
+    dcDir.deleteOnExit();
+    config.put("channel.type", "file");
     config.put("channel.capacity", "100000");
-    config.put("channel.dataDirs", "/data/usingFlume/data");
-    config.put("channel.checkpointDir", "/data/usingFlume/cp");
+    config.put("channel.dataDirs", dcDir.toString() + "/data");
+    config.put("channel.checkpointDir", dcDir.toString() + "/checkpoint");
     agent.configure(config);
     agent.start();
     Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
@@ -151,6 +159,8 @@ public class UsingFlumeEmbeddedAgent {
       config.put("processor.backoff", "true");
       config.put("processor.selector", "round_robin");
       config.put("processor.selector.maxTimeout", "30000");
+    } else {
+      config.put("processor.type", "default");
     }
   }
 }
