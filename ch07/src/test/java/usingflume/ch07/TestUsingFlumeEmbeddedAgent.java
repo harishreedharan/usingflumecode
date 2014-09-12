@@ -21,7 +21,7 @@ import java.util.List;
 public class TestUsingFlumeEmbeddedAgent {
 
   @Test
-  public void testRPCClient() throws Exception {
+  public void testEmbeddedAgent() throws Exception {
     final Source source = new AvroSource();
     final MemoryChannel channel = new MemoryChannel();
     Context ctx = new Context();
