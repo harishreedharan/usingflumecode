@@ -10,81 +10,201 @@ public final class UsingFlumeEvent {
   }
   public interface EventOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-    
+
     // repeated .Header header = 1;
+    /**
+     * <code>repeated .Header header = 1;</code>
+     */
     java.util.List<usingflume.ch03.UsingFlumeEvent.Header> 
         getHeaderList();
+    /**
+     * <code>repeated .Header header = 1;</code>
+     */
     usingflume.ch03.UsingFlumeEvent.Header getHeader(int index);
+    /**
+     * <code>repeated .Header header = 1;</code>
+     */
     int getHeaderCount();
+    /**
+     * <code>repeated .Header header = 1;</code>
+     */
     java.util.List<? extends usingflume.ch03.UsingFlumeEvent.HeaderOrBuilder> 
         getHeaderOrBuilderList();
+    /**
+     * <code>repeated .Header header = 1;</code>
+     */
     usingflume.ch03.UsingFlumeEvent.HeaderOrBuilder getHeaderOrBuilder(
         int index);
-    
+
     // required bytes body = 2;
+    /**
+     * <code>required bytes body = 2;</code>
+     */
     boolean hasBody();
+    /**
+     * <code>required bytes body = 2;</code>
+     */
     com.google.protobuf.ByteString getBody();
   }
+  /**
+   * Protobuf type {@code Event}
+   */
   public static final class Event extends
       com.google.protobuf.GeneratedMessage
       implements EventOrBuilder {
     // Use Event.newBuilder() to construct.
-    private Event(Builder builder) {
+    private Event(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private Event(boolean noInit) {}
-    
+    private Event(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final Event defaultInstance;
     public static Event getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public Event getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Event(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                header_ = new java.util.ArrayList<usingflume.ch03.UsingFlumeEvent.Header>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              header_.add(input.readMessage(usingflume.ch03.UsingFlumeEvent.Header.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000001;
+              body_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          header_ = java.util.Collections.unmodifiableList(header_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return usingflume.ch03.UsingFlumeEvent.internal_static_Event_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return usingflume.ch03.UsingFlumeEvent.internal_static_Event_fieldAccessorTable;
+      return usingflume.ch03.UsingFlumeEvent.internal_static_Event_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              usingflume.ch03.UsingFlumeEvent.Event.class, usingflume.ch03.UsingFlumeEvent.Event.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<Event> PARSER =
+        new com.google.protobuf.AbstractParser<Event>() {
+      public Event parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Event(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Event> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
     // repeated .Header header = 1;
     public static final int HEADER_FIELD_NUMBER = 1;
     private java.util.List<usingflume.ch03.UsingFlumeEvent.Header> header_;
+    /**
+     * <code>repeated .Header header = 1;</code>
+     */
     public java.util.List<usingflume.ch03.UsingFlumeEvent.Header> getHeaderList() {
       return header_;
     }
+    /**
+     * <code>repeated .Header header = 1;</code>
+     */
     public java.util.List<? extends usingflume.ch03.UsingFlumeEvent.HeaderOrBuilder> 
         getHeaderOrBuilderList() {
       return header_;
     }
+    /**
+     * <code>repeated .Header header = 1;</code>
+     */
     public int getHeaderCount() {
       return header_.size();
     }
+    /**
+     * <code>repeated .Header header = 1;</code>
+     */
     public usingflume.ch03.UsingFlumeEvent.Header getHeader(int index) {
       return header_.get(index);
     }
+    /**
+     * <code>repeated .Header header = 1;</code>
+     */
     public usingflume.ch03.UsingFlumeEvent.HeaderOrBuilder getHeaderOrBuilder(
         int index) {
       return header_.get(index);
     }
-    
+
     // required bytes body = 2;
     public static final int BODY_FIELD_NUMBER = 2;
     private com.google.protobuf.ByteString body_;
+    /**
+     * <code>required bytes body = 2;</code>
+     */
     public boolean hasBody() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>required bytes body = 2;</code>
+     */
     public com.google.protobuf.ByteString getBody() {
       return body_;
     }
-    
+
     private void initFields() {
       header_ = java.util.Collections.emptyList();
       body_ = com.google.protobuf.ByteString.EMPTY;
@@ -93,7 +213,7 @@ public final class UsingFlumeEvent {
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
-      
+
       if (!hasBody()) {
         memoizedIsInitialized = 0;
         return false;
@@ -107,7 +227,7 @@ public final class UsingFlumeEvent {
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -119,12 +239,12 @@ public final class UsingFlumeEvent {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       for (int i = 0; i < header_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -138,94 +258,83 @@ public final class UsingFlumeEvent {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static usingflume.ch03.UsingFlumeEvent.Event parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static usingflume.ch03.UsingFlumeEvent.Event parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static usingflume.ch03.UsingFlumeEvent.Event parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static usingflume.ch03.UsingFlumeEvent.Event parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static usingflume.ch03.UsingFlumeEvent.Event parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static usingflume.ch03.UsingFlumeEvent.Event parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static usingflume.ch03.UsingFlumeEvent.Event parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static usingflume.ch03.UsingFlumeEvent.Event parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static usingflume.ch03.UsingFlumeEvent.Event parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static usingflume.ch03.UsingFlumeEvent.Event parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(usingflume.ch03.UsingFlumeEvent.Event prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code Event}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements usingflume.ch03.UsingFlumeEvent.EventOrBuilder {
@@ -233,18 +342,21 @@ public final class UsingFlumeEvent {
           getDescriptor() {
         return usingflume.ch03.UsingFlumeEvent.internal_static_Event_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return usingflume.ch03.UsingFlumeEvent.internal_static_Event_fieldAccessorTable;
+        return usingflume.ch03.UsingFlumeEvent.internal_static_Event_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                usingflume.ch03.UsingFlumeEvent.Event.class, usingflume.ch03.UsingFlumeEvent.Event.Builder.class);
       }
-      
+
       // Construct using usingflume.ch03.UsingFlumeEvent.Event.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -256,7 +368,7 @@ public final class UsingFlumeEvent {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (headerBuilder_ == null) {
@@ -269,20 +381,20 @@ public final class UsingFlumeEvent {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return usingflume.ch03.UsingFlumeEvent.Event.getDescriptor();
+        return usingflume.ch03.UsingFlumeEvent.internal_static_Event_descriptor;
       }
-      
+
       public usingflume.ch03.UsingFlumeEvent.Event getDefaultInstanceForType() {
         return usingflume.ch03.UsingFlumeEvent.Event.getDefaultInstance();
       }
-      
+
       public usingflume.ch03.UsingFlumeEvent.Event build() {
         usingflume.ch03.UsingFlumeEvent.Event result = buildPartial();
         if (!result.isInitialized()) {
@@ -290,17 +402,7 @@ public final class UsingFlumeEvent {
         }
         return result;
       }
-      
-      private usingflume.ch03.UsingFlumeEvent.Event buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        usingflume.ch03.UsingFlumeEvent.Event result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public usingflume.ch03.UsingFlumeEvent.Event buildPartial() {
         usingflume.ch03.UsingFlumeEvent.Event result = new usingflume.ch03.UsingFlumeEvent.Event(this);
         int from_bitField0_ = bitField0_;
@@ -322,7 +424,7 @@ public final class UsingFlumeEvent {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof usingflume.ch03.UsingFlumeEvent.Event) {
           return mergeFrom((usingflume.ch03.UsingFlumeEvent.Event)other);
@@ -331,7 +433,7 @@ public final class UsingFlumeEvent {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(usingflume.ch03.UsingFlumeEvent.Event other) {
         if (other == usingflume.ch03.UsingFlumeEvent.Event.getDefaultInstance()) return this;
         if (headerBuilder_ == null) {
@@ -366,7 +468,7 @@ public final class UsingFlumeEvent {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         if (!hasBody()) {
           
@@ -380,47 +482,26 @@ public final class UsingFlumeEvent {
         }
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              usingflume.ch03.UsingFlumeEvent.Header.Builder subBuilder = usingflume.ch03.UsingFlumeEvent.Header.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addHeader(subBuilder.buildPartial());
-              break;
-            }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              body_ = input.readBytes();
-              break;
-            }
+        usingflume.ch03.UsingFlumeEvent.Event parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (usingflume.ch03.UsingFlumeEvent.Event) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
+
       // repeated .Header header = 1;
       private java.util.List<usingflume.ch03.UsingFlumeEvent.Header> header_ =
         java.util.Collections.emptyList();
@@ -430,10 +511,13 @@ public final class UsingFlumeEvent {
           bitField0_ |= 0x00000001;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           usingflume.ch03.UsingFlumeEvent.Header, usingflume.ch03.UsingFlumeEvent.Header.Builder, usingflume.ch03.UsingFlumeEvent.HeaderOrBuilder> headerBuilder_;
-      
+
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public java.util.List<usingflume.ch03.UsingFlumeEvent.Header> getHeaderList() {
         if (headerBuilder_ == null) {
           return java.util.Collections.unmodifiableList(header_);
@@ -441,6 +525,9 @@ public final class UsingFlumeEvent {
           return headerBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public int getHeaderCount() {
         if (headerBuilder_ == null) {
           return header_.size();
@@ -448,6 +535,9 @@ public final class UsingFlumeEvent {
           return headerBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public usingflume.ch03.UsingFlumeEvent.Header getHeader(int index) {
         if (headerBuilder_ == null) {
           return header_.get(index);
@@ -455,6 +545,9 @@ public final class UsingFlumeEvent {
           return headerBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public Builder setHeader(
           int index, usingflume.ch03.UsingFlumeEvent.Header value) {
         if (headerBuilder_ == null) {
@@ -469,6 +562,9 @@ public final class UsingFlumeEvent {
         }
         return this;
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public Builder setHeader(
           int index, usingflume.ch03.UsingFlumeEvent.Header.Builder builderForValue) {
         if (headerBuilder_ == null) {
@@ -480,6 +576,9 @@ public final class UsingFlumeEvent {
         }
         return this;
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public Builder addHeader(usingflume.ch03.UsingFlumeEvent.Header value) {
         if (headerBuilder_ == null) {
           if (value == null) {
@@ -493,6 +592,9 @@ public final class UsingFlumeEvent {
         }
         return this;
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public Builder addHeader(
           int index, usingflume.ch03.UsingFlumeEvent.Header value) {
         if (headerBuilder_ == null) {
@@ -507,6 +609,9 @@ public final class UsingFlumeEvent {
         }
         return this;
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public Builder addHeader(
           usingflume.ch03.UsingFlumeEvent.Header.Builder builderForValue) {
         if (headerBuilder_ == null) {
@@ -518,6 +623,9 @@ public final class UsingFlumeEvent {
         }
         return this;
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public Builder addHeader(
           int index, usingflume.ch03.UsingFlumeEvent.Header.Builder builderForValue) {
         if (headerBuilder_ == null) {
@@ -529,6 +637,9 @@ public final class UsingFlumeEvent {
         }
         return this;
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public Builder addAllHeader(
           java.lang.Iterable<? extends usingflume.ch03.UsingFlumeEvent.Header> values) {
         if (headerBuilder_ == null) {
@@ -540,6 +651,9 @@ public final class UsingFlumeEvent {
         }
         return this;
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public Builder clearHeader() {
         if (headerBuilder_ == null) {
           header_ = java.util.Collections.emptyList();
@@ -550,6 +664,9 @@ public final class UsingFlumeEvent {
         }
         return this;
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public Builder removeHeader(int index) {
         if (headerBuilder_ == null) {
           ensureHeaderIsMutable();
@@ -560,10 +677,16 @@ public final class UsingFlumeEvent {
         }
         return this;
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public usingflume.ch03.UsingFlumeEvent.Header.Builder getHeaderBuilder(
           int index) {
         return getHeaderFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public usingflume.ch03.UsingFlumeEvent.HeaderOrBuilder getHeaderOrBuilder(
           int index) {
         if (headerBuilder_ == null) {
@@ -571,6 +694,9 @@ public final class UsingFlumeEvent {
           return headerBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public java.util.List<? extends usingflume.ch03.UsingFlumeEvent.HeaderOrBuilder> 
            getHeaderOrBuilderList() {
         if (headerBuilder_ != null) {
@@ -579,15 +705,24 @@ public final class UsingFlumeEvent {
           return java.util.Collections.unmodifiableList(header_);
         }
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public usingflume.ch03.UsingFlumeEvent.Header.Builder addHeaderBuilder() {
         return getHeaderFieldBuilder().addBuilder(
             usingflume.ch03.UsingFlumeEvent.Header.getDefaultInstance());
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public usingflume.ch03.UsingFlumeEvent.Header.Builder addHeaderBuilder(
           int index) {
         return getHeaderFieldBuilder().addBuilder(
             index, usingflume.ch03.UsingFlumeEvent.Header.getDefaultInstance());
       }
+      /**
+       * <code>repeated .Header header = 1;</code>
+       */
       public java.util.List<usingflume.ch03.UsingFlumeEvent.Header.Builder> 
            getHeaderBuilderList() {
         return getHeaderFieldBuilder().getBuilderList();
@@ -606,15 +741,24 @@ public final class UsingFlumeEvent {
         }
         return headerBuilder_;
       }
-      
+
       // required bytes body = 2;
       private com.google.protobuf.ByteString body_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes body = 2;</code>
+       */
       public boolean hasBody() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required bytes body = 2;</code>
+       */
       public com.google.protobuf.ByteString getBody() {
         return body_;
       }
+      /**
+       * <code>required bytes body = 2;</code>
+       */
       public Builder setBody(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
@@ -624,128 +768,247 @@ public final class UsingFlumeEvent {
         onChanged();
         return this;
       }
+      /**
+       * <code>required bytes body = 2;</code>
+       */
       public Builder clearBody() {
         bitField0_ = (bitField0_ & ~0x00000002);
         body_ = getDefaultInstance().getBody();
         onChanged();
         return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:Event)
     }
-    
+
     static {
       defaultInstance = new Event(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:Event)
   }
-  
+
   public interface HeaderOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-    
+
     // required string key = 1;
+    /**
+     * <code>required string key = 1;</code>
+     */
     boolean hasKey();
-    String getKey();
-    
+    /**
+     * <code>required string key = 1;</code>
+     */
+    java.lang.String getKey();
+    /**
+     * <code>required string key = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeyBytes();
+
     // required string val = 2;
+    /**
+     * <code>required string val = 2;</code>
+     */
     boolean hasVal();
-    String getVal();
+    /**
+     * <code>required string val = 2;</code>
+     */
+    java.lang.String getVal();
+    /**
+     * <code>required string val = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getValBytes();
   }
+  /**
+   * Protobuf type {@code Header}
+   */
   public static final class Header extends
       com.google.protobuf.GeneratedMessage
       implements HeaderOrBuilder {
     // Use Header.newBuilder() to construct.
-    private Header(Builder builder) {
+    private Header(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private Header(boolean noInit) {}
-    
+    private Header(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final Header defaultInstance;
     public static Header getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public Header getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Header(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              key_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              val_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return usingflume.ch03.UsingFlumeEvent.internal_static_Header_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return usingflume.ch03.UsingFlumeEvent.internal_static_Header_fieldAccessorTable;
+      return usingflume.ch03.UsingFlumeEvent.internal_static_Header_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              usingflume.ch03.UsingFlumeEvent.Header.class, usingflume.ch03.UsingFlumeEvent.Header.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<Header> PARSER =
+        new com.google.protobuf.AbstractParser<Header>() {
+      public Header parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Header(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Header> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
     // required string key = 1;
     public static final int KEY_FIELD_NUMBER = 1;
     private java.lang.Object key_;
+    /**
+     * <code>required string key = 1;</code>
+     */
     public boolean hasKey() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public String getKey() {
+    /**
+     * <code>required string key = 1;</code>
+     */
+    public java.lang.String getKey() {
       java.lang.Object ref = key_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           key_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getKeyBytes() {
+    /**
+     * <code>required string key = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeyBytes() {
       java.lang.Object ref = key_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         key_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     // required string val = 2;
     public static final int VAL_FIELD_NUMBER = 2;
     private java.lang.Object val_;
+    /**
+     * <code>required string val = 2;</code>
+     */
     public boolean hasVal() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public String getVal() {
+    /**
+     * <code>required string val = 2;</code>
+     */
+    public java.lang.String getVal() {
       java.lang.Object ref = val_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           val_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getValBytes() {
+    /**
+     * <code>required string val = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getValBytes() {
       java.lang.Object ref = val_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         val_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     private void initFields() {
       key_ = "";
       val_ = "";
@@ -754,7 +1017,7 @@ public final class UsingFlumeEvent {
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
-      
+
       if (!hasKey()) {
         memoizedIsInitialized = 0;
         return false;
@@ -766,7 +1029,7 @@ public final class UsingFlumeEvent {
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -778,12 +1041,12 @@ public final class UsingFlumeEvent {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -797,94 +1060,83 @@ public final class UsingFlumeEvent {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static usingflume.ch03.UsingFlumeEvent.Header parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static usingflume.ch03.UsingFlumeEvent.Header parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static usingflume.ch03.UsingFlumeEvent.Header parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static usingflume.ch03.UsingFlumeEvent.Header parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static usingflume.ch03.UsingFlumeEvent.Header parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static usingflume.ch03.UsingFlumeEvent.Header parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static usingflume.ch03.UsingFlumeEvent.Header parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static usingflume.ch03.UsingFlumeEvent.Header parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static usingflume.ch03.UsingFlumeEvent.Header parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static usingflume.ch03.UsingFlumeEvent.Header parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(usingflume.ch03.UsingFlumeEvent.Header prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code Header}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements usingflume.ch03.UsingFlumeEvent.HeaderOrBuilder {
@@ -892,18 +1144,21 @@ public final class UsingFlumeEvent {
           getDescriptor() {
         return usingflume.ch03.UsingFlumeEvent.internal_static_Header_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return usingflume.ch03.UsingFlumeEvent.internal_static_Header_fieldAccessorTable;
+        return usingflume.ch03.UsingFlumeEvent.internal_static_Header_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                usingflume.ch03.UsingFlumeEvent.Header.class, usingflume.ch03.UsingFlumeEvent.Header.Builder.class);
       }
-      
+
       // Construct using usingflume.ch03.UsingFlumeEvent.Header.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -914,7 +1169,7 @@ public final class UsingFlumeEvent {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         key_ = "";
@@ -923,20 +1178,20 @@ public final class UsingFlumeEvent {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return usingflume.ch03.UsingFlumeEvent.Header.getDescriptor();
+        return usingflume.ch03.UsingFlumeEvent.internal_static_Header_descriptor;
       }
-      
+
       public usingflume.ch03.UsingFlumeEvent.Header getDefaultInstanceForType() {
         return usingflume.ch03.UsingFlumeEvent.Header.getDefaultInstance();
       }
-      
+
       public usingflume.ch03.UsingFlumeEvent.Header build() {
         usingflume.ch03.UsingFlumeEvent.Header result = buildPartial();
         if (!result.isInitialized()) {
@@ -944,17 +1199,7 @@ public final class UsingFlumeEvent {
         }
         return result;
       }
-      
-      private usingflume.ch03.UsingFlumeEvent.Header buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        usingflume.ch03.UsingFlumeEvent.Header result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public usingflume.ch03.UsingFlumeEvent.Header buildPartial() {
         usingflume.ch03.UsingFlumeEvent.Header result = new usingflume.ch03.UsingFlumeEvent.Header(this);
         int from_bitField0_ = bitField0_;
@@ -971,7 +1216,7 @@ public final class UsingFlumeEvent {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof usingflume.ch03.UsingFlumeEvent.Header) {
           return mergeFrom((usingflume.ch03.UsingFlumeEvent.Header)other);
@@ -980,19 +1225,23 @@ public final class UsingFlumeEvent {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(usingflume.ch03.UsingFlumeEvent.Header other) {
         if (other == usingflume.ch03.UsingFlumeEvent.Header.getDefaultInstance()) return this;
         if (other.hasKey()) {
-          setKey(other.getKey());
+          bitField0_ |= 0x00000001;
+          key_ = other.key_;
+          onChanged();
         }
         if (other.hasVal()) {
-          setVal(other.getVal());
+          bitField0_ |= 0x00000002;
+          val_ = other.val_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         if (!hasKey()) {
           
@@ -1004,62 +1253,69 @@ public final class UsingFlumeEvent {
         }
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              key_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              val_ = input.readBytes();
-              break;
-            }
+        usingflume.ch03.UsingFlumeEvent.Header parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (usingflume.ch03.UsingFlumeEvent.Header) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
+
       // required string key = 1;
       private java.lang.Object key_ = "";
+      /**
+       * <code>required string key = 1;</code>
+       */
       public boolean hasKey() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public String getKey() {
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public java.lang.String getKey() {
         java.lang.Object ref = key_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
           key_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setKey(String value) {
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeyBytes() {
+        java.lang.Object ref = key_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          key_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder setKey(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1068,34 +1324,72 @@ public final class UsingFlumeEvent {
         onChanged();
         return this;
       }
+      /**
+       * <code>required string key = 1;</code>
+       */
       public Builder clearKey() {
         bitField0_ = (bitField0_ & ~0x00000001);
         key_ = getDefaultInstance().getKey();
         onChanged();
         return this;
       }
-      void setKey(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000001;
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder setKeyBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         key_ = value;
         onChanged();
+        return this;
       }
-      
+
       // required string val = 2;
       private java.lang.Object val_ = "";
+      /**
+       * <code>required string val = 2;</code>
+       */
       public boolean hasVal() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public String getVal() {
+      /**
+       * <code>required string val = 2;</code>
+       */
+      public java.lang.String getVal() {
         java.lang.Object ref = val_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
           val_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setVal(String value) {
+      /**
+       * <code>required string val = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getValBytes() {
+        java.lang.Object ref = val_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          val_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string val = 2;</code>
+       */
+      public Builder setVal(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1104,29 +1398,40 @@ public final class UsingFlumeEvent {
         onChanged();
         return this;
       }
+      /**
+       * <code>required string val = 2;</code>
+       */
       public Builder clearVal() {
         bitField0_ = (bitField0_ & ~0x00000002);
         val_ = getDefaultInstance().getVal();
         onChanged();
         return this;
       }
-      void setVal(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000002;
+      /**
+       * <code>required string val = 2;</code>
+       */
+      public Builder setValBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         val_ = value;
         onChanged();
+        return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:Header)
     }
-    
+
     static {
       defaultInstance = new Header(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:Header)
   }
-  
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Event_descriptor;
   private static
@@ -1137,7 +1442,7 @@ public final class UsingFlumeEvent {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Header_fieldAccessorTable;
-  
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -1161,17 +1466,13 @@ public final class UsingFlumeEvent {
           internal_static_Event_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Event_descriptor,
-              new java.lang.String[] { "Header", "Body", },
-              usingflume.ch03.UsingFlumeEvent.Event.class,
-              usingflume.ch03.UsingFlumeEvent.Event.Builder.class);
+              new java.lang.String[] { "Header", "Body", });
           internal_static_Header_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_Header_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Header_descriptor,
-              new java.lang.String[] { "Key", "Val", },
-              usingflume.ch03.UsingFlumeEvent.Header.class,
-              usingflume.ch03.UsingFlumeEvent.Header.Builder.class);
+              new java.lang.String[] { "Key", "Val", });
           return null;
         }
       };
@@ -1180,6 +1481,6 @@ public final class UsingFlumeEvent {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }
