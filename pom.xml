@@ -14,6 +14,7 @@
     <module>ch07</module>
   </modules>
   <packaging>pom</packaging>
+  <name>Companion code for the Using Flume book</name>
 
   <build>
     <pluginManagement>

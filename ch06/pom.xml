@@ -10,6 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>ch06</artifactId>
+  <name>Using Flume: Chapter 6</name>
 
   <dependencies>
     <dependency>
