@@ -12,7 +12,7 @@ public class UsingFlumeDefaultRPCApp extends UsingFlumeRPCApp {
   private String remote;
 
   @Override
-  protected void setClient(Properties p) {
+  protected void setClientTypeInConfig(Properties p) {
     p.setProperty(CONFIG_CLIENT_TYPE, DEFAULT_CLIENT_TYPE);
   }
 

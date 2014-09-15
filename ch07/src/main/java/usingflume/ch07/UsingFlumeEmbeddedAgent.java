@@ -85,9 +85,7 @@ public class UsingFlumeEmbeddedAgent {
 
     Map<String, String> config = new HashMap<String, String>();
     parseHostsAndPort(commandLine, config);
-//    config.put("sources", "s1");
     config.put("source.type", "embedded");
-//    config.put("source.channels", "file");
     File dcDir = Files.createTempDir();
     dcDir.deleteOnExit();
     config.put("channel.type", "file");
@@ -102,8 +100,6 @@ public class UsingFlumeEmbeddedAgent {
         agent.stop();
       }
     }));
-
-
   }
 
   private void generateAndSend() {

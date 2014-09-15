@@ -14,7 +14,7 @@ public class UsingFlumeLBRPCApp extends UsingFlumeRPCApp {
   private String port;
 
   @Override
-  protected void setClient(Properties p) {
+  protected void setClientTypeInConfig(Properties p) {
     p.setProperty(CONFIG_CLIENT_TYPE, "default_loadbalance");
   }
 

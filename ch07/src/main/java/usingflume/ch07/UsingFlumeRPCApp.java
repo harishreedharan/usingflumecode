@@ -22,7 +22,6 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.apache.flume.api.RpcClientConfigurationConstants.*;
 
@@ -39,7 +38,7 @@ public abstract class UsingFlumeRPCApp {
 
   protected void parseCommandLine(String args[])
     throws ParseException {
-    setClient(config);
+    setClientTypeInConfig(config);
     Options opts = new Options();
 
     Option opt = new Option("r", "remote", true,
@@ -141,7 +140,7 @@ public abstract class UsingFlumeRPCApp {
     backoffConfig(commandLine, config);
   }
 
-  protected abstract void setClient(Properties p);
+  protected abstract void setClientTypeInConfig(Properties p);
 
   protected abstract void parseHostsAndPort(CommandLine commandLine,
     Properties config);
